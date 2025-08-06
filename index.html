@@ -3,682 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>あなたの名前 - ポートフォリオ</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link rel="stylesheet" href="/style.css">
+    <title>Webデベロッパー ポートフォリオ</title>
 
-        body {
-            font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ナビゲーション */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #667eea;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* ヒーローセクション */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;50,30;0,0" dur="20s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="150" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;-30,50;0,0" dur="25s" repeatCount="indefinite"/></circle><circle cx="400" cy="700" r="120" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;40,-20;0,0" dur="18s" repeatCount="indefinite"/></circle></svg>') center/cover;
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #f0f8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero .description {
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            opacity: 0.8;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* セクション */
-        section {
-            padding: 5rem 0;
-            background: white;
-        }
-
-        section:nth-child(even) {
-            background: #f8fafc;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #333;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        /* 自己紹介 */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-image {
-            text-align: center;
-        }
-
-        .avatar {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
-            margin: 0 auto;
-            transition: transform 0.3s ease;
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .avatar:hover {
-            transform: scale(1.05);
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #666;
-        }
-
-        /* スキル */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .skill-category h3 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* プロジェクト */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .project-image {
-            height: 200px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-content h3 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .project-content p {
-            color: #666;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .project-link:hover {
-            color: #764ba2;
-        }
-
-        /* お問い合わせ */
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #666;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item:hover {
-            color: #667eea;
-        }
-
-        /* フッター */
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        /* モバイル対応 */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .avatar {
-                width: 200px;
-                height: 200px;
-                font-size: 3rem;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        /* アニメーション */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
 </head>
 <body>
-    <!-- ナビゲーション -->
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">あなたの名前</a>
+    <header>
+        <nav>
+            <a href="/" class="logo">Sunny WebDev</a>
             <ul class="nav-links">
-                <li><a href="#home">ホーム</a></li>
+                <li><a href="#hero">ホーム</a></li>
                 <li><a href="#about">自己紹介</a></li>
                 <li><a href="#skills">スキル</a></li>
-                <li><a href="#projects">プロジェクト</a></li>
+                <li><a href="#portfolio">作品例</a></li>
+                <li><a href="#experience">経験</a></li>
                 <li><a href="#contact">お問い合わせ</a></li>
             </ul>
-        </div>
-    </nav>
-
-    <!-- ヒーローセクション -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>こんにちは、私は[あなたの名前]です</h1>
-                <p class="subtitle">フロントエンド/バックエンド/フルスタック開発者</p>
-                <p class="description">
-                    ユーザーエクスペリエンスとパフォーマンスに焦点を当てた
-                    モダンなWebアプリケーションを構築しています。React、Node.js、
-                    最新のWeb技術を専門としています。
-                </p>
-                <a href="#projects" class="cta-button">作品を見る</a>
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+        
+        <div class="hero-content">
+            <h1>Webデベロッパー</h1>
+            <p>Sannikova Tatianaのポートフォリオサイトへようこそ。<br>
+                
+                モダンで使いやすいウェブサイトを、最新技術で開発しています。<br>
+                一緒に素晴らしいプロジェクトを作りましょう！</p>
+            <a href="#about" class="cta-button">詳しく見る</a>
         </div>
     </section>
 
-    <!-- 自己紹介 -->
-    <section id="about">
+    <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">自己紹介</h2>
+            <h2 class="fade-in">自己紹介</h2>
             <div class="about-content fade-in">
                 <div class="about-image">
-                    <div class="avatar">👨‍💻</div>
+                    <img src="/images/portfolio-photo.webp" alt="">
                 </div>
                 <div class="about-text">
-                    <p>
-                        私は[X]年以上のWebアプリケーション開発経験を持つ
-                        情熱的な開発者です。複雑なタスクをシンプルで美しく、
-                        直感的なソリューションに変えることが好きです。
-                    </p>
-                    <p>
-                        コーディングをしていない時は、新しい技術を学んだり、
-                        技術書を読んだり、オープンソースプロジェクトに
-                        取り組んだりしています。
-                    </p>
-                    <p>
-                        開発に対する私のアプローチは、クリーンなコード、
-                        ベストプラクティス、継続的な学習に基づいています。
-                    </p>
+                    <h3>Webプログラマ（1年以上の経験）</h3>
+                    <p>私はWebプログラマとして1年以上働いており、主にWebサイトの開発を担当してきました。HTML、CSS、JavaScriptを用いたレスポンシブデザインの実装により、ユーザビリティ向上とモバイル対応を実現し、アクセス数や顧客満足度の向上に寄与しました。</p>
+                    <p>WordPressを活用したショッピングサイトの構築と運営、PHPやjQueryを使った動的コンテンツの開発を通じて、ユーザーインタラクションの向上とサイトの機能拡張を実現してきました。</p>
+                    <p>これらの業務を通じて、Web開発の基本から応用まで幅広く学び、フロントエンドからバックエンドまでの知識とスキルを身につけました。今後は、より高度なWebシステム開発やチームリーダーとしての役割も担いたいと考えています。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- スキル -->
-    <section id="skills">
+    <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">スキル</h2>
-            <div class="skills-grid fade-in">
-                <div class="skill-category">
-                    <h3>フロントエンド</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Vue.js</span>
-                        <span class="skill-tag">TypeScript</span>
-                    </div>
+            <h2 class="fade-in">経験・スキル</h2>
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <h3><span class="skill-icon">F</span>フロントエンド開発</h3>
+                    <ul>
+                        <li>HTML、CSS、JavaScriptを用いたレスポンシブデザイン</li>
+                        <li>モバイルファーストのWebサイト開発</li>
+                        <li>ユーザビリティ向上の実現</li>
+                        <li>jQueryを活用した動的コンテンツ</li>
+                    </ul>
                 </div>
-                <div class="skill-category">
-                    <h3>バックエンド</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Express</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">MongoDB</span>
-                    </div>
+                <div class="skill-card fade-in">
+                    <h3><span class="skill-icon">E</span>ECサイト構築</h3>
+                    <ul>
+                        <li>EC-Cubeでのサイト開発経験</li>
+                        <li>Shopifyでのサイト開発経験</li>
+                    </ul>
                 </div>
-                <div class="skill-category">
-                    <h3>ツール</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Webpack</span>
-                        <span class="skill-tag">Sass</span>
-                        <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">VS Code</span>
-                    </div>
+                <div class="skill-card fade-in">
+                    <h3><span class="skill-icon">B</span>バックエンド開発</h3>
+                    <ul>
+                        <li>PHPを使った動的コンテンツ開発</li>
+                        <li>データベース連携システム構築</li>
+                        <li>サーバーサイド処理の最適化</li>
+                        <li>API連携・システム統合</li>
+                        <li>セキュリティ対策の実装</li>
+                    </ul>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3><span class="skill-icon">P</span>開発プロセス</h3>
+                    <ul>
+                        <li>ファストコーディングによる効率的な開発</li>
+                        <li>納期厳守の実現</li>
+                        <li>顧客ニーズを捉えた提案力</li>
+                        <li>高品質なコードの提供</li>
+                        <li>継続的な学習と技術向上</li>
+                    </ul>
+                </div>
+                <div class="skill-card fade-in">
+                    <h3><span class="skill-icon">P</span>プラグイン開発</h3>
+                    <ul>
+                        <li>WordPress向けカスタムプラグインの設計・実装</li>
+                        <li>既存機能の拡張とユーザー体験の向上</li>
+                        <li>フックやフィルターを活用した柔軟な開発</li>
+                        <li>管理画面UIの作成と設定機能の追加</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- プロジェクト -->
-    <section id="projects">
+    <section id="portfolio" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">プロジェクト</h2>
-            <div class="projects-grid fade-in">
-                <div class="project-card">
-                    <div class="project-image">🌐</div>
-                    <div class="project-content">
-                        <h3>Webアプリケーション</h3>
-                        <p>ReactとNode.jsを使用したモダンなSPAアプリケーション。
-                           認証機能、CRUD操作、リアルタイム更新機能を含みます。</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link">デモ</a>
-                            <a href="#" class="project-link">GitHub</a>
+            <h2 class="fade-in">作品例</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-wrapper">
+                    <h3>沖縄JTB株式会社コーポレートサイト</h3>
+                    <div class="portfolio-item fade-in">                   
+                    <div class="portfolio-image">
+                        <img src="/images/okinawa-jtb.webp" alt="コーポレートサイト" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>フロントエンド実装</h3>
+                            <p>HTML5、CSS3、JavaScriptを使用</p>
+                            <a href="https://okinawa-jtb.co.jp/" class="portfolio-btn" target="_blank">詳細を見る</a>
+                        </div>
+                    </div>
+                </div>             </div>
+                 
+                <div class="portfolio-wrapper">
+                    <h3>ビデオアシスタント</h3>
+                    <div class="portfolio-item fade-in">
+                    <div class="portfolio-image">
+                        <img src="/images/poster.png" alt="ビデオアシスタント" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>WordPress用プラグイン</h3>
+                            <p>JavaScript、PHP、SCF（Smart Custom Fields）使用</p>
+                            <a href="/project.html" class="portfolio-btn">詳細を見る</a>
+                        </div>
+                    </div>
+                </div></div>
+                
+                <div class="portfolio-wrapper">
+                    <h3>山田商店ECサイト</h3>
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-image">
+                            <img src="/images/ec-cube.webp" alt="山田商店EC" class="portfolio-img">
+                            <div class="portfolio-overlay">
+                                <h3>EC-CUBE機能実装</h3>
+                                <p>EC-CUBE開発（一部機能担当）・PHP・MySQL</p>
+                                <a href="https://yamada-ec-cube-study.php74.ropes.co.jp/" class="portfolio-btn" target="_blank">詳細を見る</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">📱</div>
-                    <div class="project-content">
-                        <h3>モバイルアプリ</h3>
-                        <p>React Nativeを使用したクロスプラットフォーム
-                           モバイルアプリ。オフラインモードとプッシュ通知に対応。</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link">デモ</a>
-                            <a href="#" class="project-link">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">🛒</div>
-                    <div class="project-content">
-                        <h3>ECプラットフォーム</h3>
-                        <p>ショッピングカート、決済、注文システム、
-                           管理画面を備えた本格的なオンラインショップ。</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link">デモ</a>
-                            <a href="#" class="project-link">GitHub</a>
-                        </div>
-                    </div>
-                </div>
+                
+                
             </div>
         </div>
     </section>
 
-    <!-- お問い合わせ -->
-    <section id="contact">
+    <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title fade-in">お問い合わせ</h2>
-            <div class="contact-content fade-in">
-                <p>新しいプロジェクトや協力の機会についてお気軽にご相談ください！</p>
-                <div class="contact-info">
-                    <a href="mailto:your.email@example.com" class="contact-item">
-                        📧 your.email@example.com
-                    </a>
-                    <a href="https://github.com/yourusername" class="contact-item">
-                        💻 GitHub
-                    </a>
-                    <a href="https://linkedin.com/in/yourprofile" class="contact-item">
-                        💼 LinkedIn
-                    </a>
-                    <a href="https://t.me/yourusername" class="contact-item">
-                        💬 Telegram
-                    </a>
+            <h2 class="fade-in">職歴概要</h2>
+            <div class="experience-timeline">
+                <div class="timeline-item fade-in">
+                    <h3>レスポンシブデザインの実装</h3>
+                    <p>HTML、CSS、JavaScriptを用いたレスポンシブデザインとモバイルファーストのWebサイト開発を担当。ユーザビリティ向上とモバイル対応を実現し、アクセス数や顧客満足度の向上に大きく貢献しました。</p>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <h3>動的コンテンツの開発</h3>
+                    <p>PHPとjQueryを使った動的コンテンツの開発とサイト改善を実施。ユーザーインタラクションの向上とサイトの機能拡張を実現し、訪問者の興味を引きつけるサイトを構築しました。</p>
+                </div>
+                <div class="timeline-item fade-in">
+                    <h3>総合的なWeb開発スキルの習得</h3>
+                    <p>これらの業務を通じて、Web開発の基本から応用まで幅広く学習。フロントエンドからバックエンドまでの知識とスキルを身につけ、スピーディかつ高品質な開発を実現しています。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- フッター -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="fade-in">お問い合わせ</h2>
+            <div class="contact-links">
+                <div class="contact-card linkedin fade-in">
+                    <div class="icon"><img src="/images/icon-linkedin.svg" alt=""></div>
+                    <h3>LinkedIn</h3>
+                    <p>プロフェッショナルなネットワークでつながりましょう</p>
+                    <a href="https://www.linkedin.com/in/tatiana-sannikova-413b25124/" class="contact-btn" target="_blank">LinkedInで連絡</a>
+                </div>
+                
+                <div class="contact-card email fade-in">
+                    <div class="icon"><img src="/images/icon-mail.svg" alt=""></div>
+                    <h3>メール</h3>
+                    <p>お仕事のご相談やご質問はこちらから</p>
+                    <a href="mailto:titania.kuo@gmail.com" class="contact-btn">メールを送信</a>
+                </div>
+                
+                <div class="contact-card line fade-in">
+                    <div class="icon"><img src="/images/icon-line.svg" alt=""></div>
+                    <h3>LINE</h3>
+                    <p>気軽にメッセージを送ってください</p>
+                    <a href="https://line.me/ti/p/ck0Xa7g6u2" class="contact-btn" target="_blank">LINEで連絡</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
-            <p>&copy; 2025 あなたの名前. All rights reserved.</p>
+            <p>&copy; 2025 Webデベロッパー ポートフォリオ. 最新技術と❤️で作成されました。</p>
         </div>
     </footer>
+    <script src="/script.js"></script>
 
-    <script>
-        // セクションへのスムーズスクロール
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // スクロール時の要素表示アニメーション
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // fade-inクラスを持つ全ての要素を監視
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // スクロール時のナビゲーション変更
-        let lastScrollTop = 0;
-        const nav = document.querySelector('nav');
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollTop = scrollTop;
-        });
-
-        // プロジェクトカードのインタラクション
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // タイプライター効果
-        const heroTitle = document.querySelector('.hero h1');
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = '';
-        
-        let charIndex = 0;
-        const typeSpeed = 100;
-        
-        function typeWriter() {
-            if (charIndex < originalText.length) {
-                heroTitle.textContent += originalText.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, typeSpeed);
-            }
-        }
-        
-        // 少し遅れてタイプライター効果を開始
-        setTimeout(typeWriter, 500);
-    </script>
 </body>
 </html>

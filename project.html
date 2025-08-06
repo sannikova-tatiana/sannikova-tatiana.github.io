@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Webデベロッパー ポートフォリオ</title>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">Sunny WebDev</a>
+            <ul class="nav-links">
+                <li><a href="#hero">ホーム</a></li>
+                <li><a href="#about">自己紹介</a></li>
+                <li><a href="#skills">スキル</a></li>
+                <li><a href="#portfolio">作品例</a></li>
+                <li><a href="#experience">経験</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="project">
+        <section class="project-section fade-in">
+            <div class="container">
+                <h2 class="section-title">🎥 Video Assistant Plugin for WordPress</h2>
+                <p class="project-description">
+                    「Video Assistant」は、訪問者にインタラクティブな動画ガイドを提供するWordPress用プラグインです。サイトの右下に表示されるバブルボタン（🤖）をクリックすると、ステップ形式で構成された動画アシスタントが起動し、ユーザーを効果的にナビゲートします。
+                </p>
+        
+                <h3>🔧 主な機能</h3>
+                <ul class="feature-list">
+                    <li>カスタム投稿タイプ <code>video_assistant_step</code> を使用し、ステップごとの動画アシスタントを構成</li>
+                    <li>各ステップに動画、テキスト、複数のボタンを設定可能</li>
+                    <li>ボタンアクションは「次のステップ」「外部リンク」「電話」「メール送信」「ファイルダウンロード」に対応</li>
+                    <li>右下のバブルボタン（🤖）から簡単に起動</li>
+                    <li>進行状況が一目でわかるプログレスバー付きの動画再生</li>
+                    <li>音声のON/OFF切り替えボタンを搭載</li>
+                </ul>
+        
+                <p class="project-note">
+                    このプラグインは、Smart Custom Fields（SCF）、JavaScript、PHPを活用して開発されており、柔軟なカスタマイズが可能です。管理画面から直感的に設定できるため、技術的な知識がなくても導入できます。
+                </p>
+        
+                <h3>🎬 動作デモ</h3>
+                <div class="demo-video" style="text-align: center; margin-top: 20px;">
+                    <video controls poster="images/poster.png">
+                        <source src="/images/va-demo.mp4" type="video/mp4">
+                        お使いのブラウザは video タグをサポートしていません。
+                    </video>
+                    <p class="caption">アシスタント起動から操作完了までの流れ</p>
+                </div>
+        
+                <h3>🖥 管理画面のスクリーンショット</h3>
+                <div class="admin-screenshot" style="text-align: center; margin-top: 20px;">
+                    <img src="/images/va-dashboard.webp" alt="ビデオアシスタント管理画面" style="max-width: 100%; border-radius: 8px;">
+                    <p class="caption">Smart Custom Fieldsによる直感的なステップ編集</p>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Webデベロッパー ポートフォリオ. 最新技術と❤️で作成されました。</p>
+        </div>
+    </footer>
+    <script src="/script.js"></script>
+
+</body>
+</html>
