@@ -371,10 +371,11 @@ nav {
   background: white;
 }
 
-.portfolio-item:hover {
+.portfolio-item:not(.portfolio-item--list):hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
+
 
 .portfolio-image {
   position: relative;
@@ -431,6 +432,24 @@ nav {
 
 .portfolio-item:hover .portfolio-overlay {
   transform: translateY(0);
+}
+
+.portfolio-item--list {
+  padding: 20px;
+  list-style: none;
+}
+
+.portfolio-item--list .portfolio-overlay {
+  display: none;
+}
+
+.portfolio-item--list a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.portfolio-item--list a:visited {
+  color: #764ba2;
 }
 
 .portfolio-overlay h3 {
@@ -620,6 +639,7 @@ footer {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -627,10 +647,12 @@ footer {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
